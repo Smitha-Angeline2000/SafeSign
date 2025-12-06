@@ -3,7 +3,7 @@ import os
 import openai
 import textwrap
 
-OPENAI_KEY = os.getenv("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")
+OPENAI_KEY = os.getenv("YOUR_OWN_KEY_HERE")
 if OPENAI_KEY:
     openai.api_key = OPENAI_KEY
 
