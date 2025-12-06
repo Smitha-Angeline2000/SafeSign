@@ -1,5 +1,9 @@
 fastapi
 uvicorn
-pdfplumber
 jinja2
 python-multipart
+pdfplumber
+pytesseract
+pdf2image
+python-docx
+openai

@@ -1,60 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeSign Analysis Result</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <title>SafeSign — Analysis Results</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <style>
+        .section-title {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        .risk-score {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            padding: 18px;
+            background: #fef3c7;
+            border-radius: 10px;
+            border: 1px solid #fcd34d;
+            color: #b45309;
+        }
+        .json-box {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            white-space: pre-wrap;
+            font-family: Consolas, monospace;
+        }
+        .small-muted { color: #6b7280; font-size: 14px; }
+    </style>
 </head>
-<body class="bg-gray-100 p-10">
-    <div class="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-lg">
 
-        <h1 class="text-3xl font-bold text-gray-800 mb-4">Analysis Result</h1>
+<body>
+    <div class="container">
+        <h1>SafeSign — Document Analysis Results</h1>
+        <p class="small-muted">Full summary, risks, and extracted content.</p>
 
-        <!-- Overall Risk -->
-        <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-600 rounded">
-            <h2 class="text-2xl font-semibold text-gray-700">Overall Risk</h2>
-            <p class="text-red-600 font-bold text-xl">{{ risk }}%</p>
-        </div>
+        <!-- RISK SCORE -->
+        <div class="section-title">Overall Risk Score</div>
+        <div id="riskScore" class="risk-score">Loading...</div>
 
-        <!-- Summary -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Summary</h2>
-            <pre class="bg-gray-100 p-4 rounded border border-gray-300 text-sm whitespace-pre-wrap">
-{{ summary }}
-            </pre>
-        </div>
+        <!-- SUMMARY -->
+        <div class="section-title">Plain-English Summary</div>
+        <div id="summaryBox" class="card"></div>
 
-        <!-- Clause Detection + Risk -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Detected Clauses</h2>
-            <ul class="list-disc ml-6">
-                {% for key, value in clauses.items() %}
-                    <li class="mb-2">
-                        <strong>{{ key.replace('_',' ').title() }}:</strong>
-                        {% if value.present %}
-                            <span class="text-green-600 font-semibold">YES</span>
-                            — {{ value.risk }}
-                        {% else %}
-                            <span class="text-red-600 font-semibold">NO</span>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <!-- EXPLANATION -->
+        <div class="section-title">Why This Matters</div>
+        <div id="explanationBox" class="card"></div>
 
-        <!-- Full Extracted Text -->
-        <div class="mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Full Extracted Text</h2>
-            <pre class="bg-gray-100 p-4 rounded border border-gray-300 text-sm whitespace-pre-wrap h-64 overflow-y-scroll">
-{{ text }}
-            </pre>
-        </div>
+        <!-- LOCAL RULES -->
+        <div class="section-title">Detected Legal Red Flags</div>
+        <pre id="localBox" class="json-box"></pre>
 
-        <!-- Back button -->
-        <div class="mt-6">
-            <a href="/" class="text-blue-600 hover:underline font-semibold">&larr; Upload another document</a>
-        </div>
+        <!-- FULL TEXT -->
+        <div class="section-title">Extracted Contract Text</div>
+        <pre id="textBox" class="json-box" style="max-height:350px; overflow:auto;"></pre>
     </div>
+
+    <script>
+        </script>
+
+    </script>
+
 </body>
 </html>
