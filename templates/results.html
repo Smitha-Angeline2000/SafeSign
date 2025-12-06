@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSign Analysis Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+    <div class="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Analysis Result</h1>
+
+        <!-- Overall Risk -->
+        <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-600 rounded">
+            <h2 class="text-2xl font-semibold text-gray-700">Overall Risk</h2>
+            <p class="text-red-600 font-bold text-xl">{{ risk }}%</p>
+        </div>
+
+        <!-- Summary -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Summary</h2>
+            <pre class="bg-gray-100 p-4 rounded border border-gray-300 text-sm whitespace-pre-wrap">
+{{ summary }}
+            </pre>
+        </div>
+
+        <!-- Clause Detection + Risk -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Detected Clauses</h2>
+            <ul class="list-disc ml-6">
+                {% for key, value in clauses.items() %}
+                    <li class="mb-2">
+                        <strong>{{ key.replace('_',' ').title() }}:</strong>
+                        {% if value.present %}
+                            <span class="text-green-600 font-semibold">YES</span>
+                            — {{ value.risk }}
+                        {% else %}
+                            <span class="text-red-600 font-semibold">NO</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Full Extracted Text -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Full Extracted Text</h2>
+            <pre class="bg-gray-100 p-4 rounded border border-gray-300 text-sm whitespace-pre-wrap h-64 overflow-y-scroll">
+{{ text }}
+            </pre>
+        </div>
+
+        <!-- Back button -->
+        <div class="mt-6">
+            <a href="/" class="text-blue-600 hover:underline font-semibold">&larr; Upload another document</a>
+        </div>
+    </div>
+</body>
+</html>
